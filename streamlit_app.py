@@ -159,13 +159,3 @@ elif mode == "Voice Recognition":
             else:
                 st.warning("No text available for calculations.")
 
-        # Text-to-Speech
-        if st.button("Convert Recognized Text to Speech"):
-            if text.strip() != "":
-                tts = gTTS(text)
-                audio_bytes = BytesIO()
-                tts.write_to_fp(audio_bytes)
-                audio_bytes.seek(0)
-                st.audio(audio_bytes, format="audio/mp3")
-            else:
-                st.warning("No text available for speech.")
