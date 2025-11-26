@@ -16,7 +16,8 @@ while loop:
       a = []
       z = ''
       result = 0
-      image = cv2.imread('C:/Users/Admin/PycharmProjects/aneesh/1556.png', 0)
+
+      image = cv2.imread('/Users/aneeshpotnis/PycharmProjects/Pix2Vox/OCR-and-Speech-Recognition/1556.png', 0)
       filename = "{}.png".format(os.getpid())
       cv2.imwrite(filename, image)
       text = pytesseract.image_to_string(Image.open(filename))
