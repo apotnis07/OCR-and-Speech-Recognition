@@ -8,7 +8,7 @@ from io import BytesIO
 from gtts import gTTS
 
 st.title("OCR and Speech Recognition Project")
-st.write("Extract text from images or audio, perform calculations, and convert text to speech.")
+st.write("Extract text from images or audio, perform calculations, convert text to speech, and download the text.")
 
 # Sidebar for mode selection
 mode = st.sidebar.selectbox("Choose Input Method", ["Image OCR", "Voice Recognition"])
@@ -30,11 +30,17 @@ if mode == "Image OCR":
         st.subheader("Extracted Text")
         st.write(text if text.strip() != "" else "No text detected.")
 
-        # Save text to file
-        if st.button("Save Text to File"):
+        # Save text and provide download
+        if st.button("Save and Download Text"):
             with open("Proj.txt", "w") as f:
                 f.write(text)
             st.success("Text saved to Proj.txt")
+            st.download_button(
+                label="Download Proj.txt",
+                data=text,
+                file_name="Proj.txt",
+                mime="text/plain"
+            )
 
         # Perform calculations
         if st.button("Perform Calculations"):
@@ -95,11 +101,17 @@ elif mode == "Voice Recognition":
             st.error("Couldn't get results from Google SR")
             text = ""
 
-        # Save text to file
-        if st.button("Save Recognized Text to File"):
+        # Save text and provide download
+        if st.button("Save and Download Recognized Text"):
             with open("Proj.txt", "w") as f:
                 f.write(text)
             st.success("Text saved to Proj.txt")
+            st.download_button(
+                label="Download Proj.txt",
+                data=text,
+                file_name="Proj.txt",
+                mime="text/plain"
+            )
 
         # Helper function to parse operations safely
         def parse_operations(m):
