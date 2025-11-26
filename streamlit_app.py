@@ -2,7 +2,6 @@
 import streamlit as st
 from PIL import Image
 import pytesseract
-import cv2
 import os
 import speech_recognition as sr
 from io import BytesIO
@@ -18,10 +17,11 @@ mode = st.sidebar.selectbox("Choose Input Method", ["Image OCR", "Voice Recognit
 if mode == "Image OCR":
     uploaded_image = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
     if uploaded_image:
-        image = Image.open(uploaded_image)
+        # Open image with PIL and convert to grayscale
+        image = Image.open(uploaded_image).convert("L")
         st.image(image, caption="Uploaded Image", use_column_width=True)
 
-        # Save temporarily for OpenCV & pytesseract processing
+        # Save temporarily for pytesseract processing
         temp_filename = f"{os.getpid()}.png"
         image.save(temp_filename)
 
